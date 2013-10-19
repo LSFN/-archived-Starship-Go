@@ -59,7 +59,7 @@ message STSup {
     }
 
     optional RCon rcon = 1;
-    optional JoinRequest join = 2;
+    optional JoinRequest joinRequest = 2;
     optional Connection connection = 3;
     optional Lobby lobby = 4;
     optional Reactor reactor = 5;
