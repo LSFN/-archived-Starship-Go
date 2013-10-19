@@ -39,7 +39,7 @@ message STSup {
 
     message PowerDistribution {
         message SystemState {
-            required string systemID = 1;
+            required uint32 systemID = 1;
             required bool systemState = 2;
         }
 
