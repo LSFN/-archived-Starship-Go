@@ -50,7 +50,7 @@ message STSup {
             optional bytes  bytesValue = 10;
         }
 
-        repeated Value values;
+        repeated Value values = 1;
     }
 
     optional RCon rcon = 1;
@@ -113,14 +113,14 @@ message STSdown {
             optional bytes  bytesValue = 10;
         }
 
-        repeated Value values;
+        repeated Value values = 1;
     }
 
     optional Connection connection = 1;
     optional JoinInfo joinInfo = 2;
     optional JoinResponse joinResponse = 3;
     optional Lobby lobby = 4;
-    optional SubscriptionResponse = 5;
-    optional SubscriptionValues = 6;
+    optional SubscriptionResponse subscriptionResponse = 5;
+    optional SubscriptionValues subscriptionValues = 6;
 
 }
