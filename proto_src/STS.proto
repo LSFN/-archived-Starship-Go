@@ -33,8 +33,8 @@ message STSup {
     }
     
     message Reactor {
-        optional uint32 reactantIntroduction = 1;
-        optional uint32 coolantIntroduction = 2;
+        optional double reactantIntroduction = 1;
+        optional double coolantIntroduction = 2;
     }
 
     message PowerDistribution {
@@ -47,8 +47,8 @@ message STSup {
     }
 
     message Engines {
-        optional uint32 leftEngineThrottle = 1;
-        optional uint32 rightEngineThrottle = 2;
+        optional double leftEngineThrottle = 1;
+        optional double rightEngineThrottle = 2;
     }
 
     message Thrusters {
@@ -131,7 +131,7 @@ message STSdown {
         message SystemState {
             required uint32 systemID = 1;
             required bool systemState = 2;
-            required uint32 powerLevel = 3;
+            required double powerLevel = 3;
         }
 
         repeated SystemDescription systemDescriptions = 1;
