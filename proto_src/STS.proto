@@ -32,40 +32,33 @@ message STSup {
         optional string shipName = 2;
     }
     
-    message Reactor {
-        optional double reactantIntroduction = 1;
-        optional double coolantIntroduction = 2;
+    message Subscribe {
+        repeated string valueNames = 1;
     }
 
-    message PowerDistribution {
-        message SystemState {
-            required uint32 systemID = 1;
-            required bool systemState = 2;
+    message SubscriptionValues {
+        message Value {
+            required uint32 id = 1;
+            optional double doubleValue = 2;
+            optional float  floatValue = 3;
+            optional uint32 uint32Value = 4;
+            optional uint64 uint64Value = 5;
+            optional sint32 sint32Value = 6;
+            optional sint64 sint64Value = 7;
+            optional bool   boolValue = 8;
+            optional string stringValue = 9;
+            optional bytes  bytesValue = 10;
         }
 
-        repeated SystemState systemStates = 1;
-    }
-
-    message Engines {
-        optional double leftEngineThrottle = 1;
-        optional double rightEngineThrottle = 2;
-    }
-
-    message Thrusters {
-        optional double forwardLeft = 1;
-        optional double forwardRight = 2;
-        optional double rearLeft = 3;
-        optional double rearRight = 4;
+        repeated Value values;
     }
 
     optional RCon rcon = 1;
     optional JoinRequest joinRequest = 2;
     optional Connection connection = 3;
     optional Lobby lobby = 4;
-    optional Reactor reactor = 5;
-    optional PowerDistribution powerDistribution = 6;
-    optional Engines engines = 7;
-    optional Thrusters thrusters = 8;
+    optional Subscribe subscribe = 5;
+    optional SubscriptionValues subscriptionValues = 6;
 }
 
 message STSdown {
@@ -96,53 +89,38 @@ message STSdown {
        optional bool gameStarted = 4;
     }
     
-    message VisualSensors {
-        message SpaceObject {
-            enum Type {
-                SHIP = 0;
-                ASTEROID = 1;         
-            }
-        
-            message Point {
-                optional double x = 1;
-                optional double y = 2;
-            }
-            
-            optional Type type = 1;
-            optional Point position = 2;
-            // orientation is in radians
-            optional double orientation = 3; 
+    message SubscriptionResponse {
+        message ValueDescription {
+            required string valueName = 1;
+            required uint32 valueID = 2;
+            required string valueType = 3; // A string name of the value type corresponding to one of protobuf's types
         }
-        
-        repeated SpaceObject spaceObjects = 1;
+
+        repeated ValueDescription valueDescriptions = 1;
     }
     
-    message Reactor {
-        optional double powerOutput = 1;
-        optional double heatLevel = 2;
-    }
-
-    message PowerDistribution {
-        message SystemDescription {
-            required uint32 systemID = 1;
-            required string systemName = 2;
+    message SubscriptionValues {
+        message Value {
+            required uint32 id = 1;
+            optional double doubleValue = 2;
+            optional float  floatValue = 3;
+            optional uint32 uint32Value = 4;
+            optional uint64 uint64Value = 5;
+            optional sint32 sint32Value = 6;
+            optional sint64 sint64Value = 7;
+            optional bool   boolValue = 8;
+            optional string stringValue = 9;
+            optional bytes  bytesValue = 10;
         }
 
-        message SystemState {
-            required uint32 systemID = 1;
-            required bool systemState = 2;
-            required double powerLevel = 3;
-        }
-
-        repeated SystemDescription systemDescriptions = 1;
-        repeated SystemState systemStates = 2;
+        repeated Value values;
     }
 
     optional Connection connection = 1;
     optional JoinInfo joinInfo = 2;
     optional JoinResponse joinResponse = 3;
     optional Lobby lobby = 4;
-    optional VisualSensors visualSensors = 5;
-    optional Reactor reactor = 6;
-    optional PowerDistribution powerDistribution = 7;
+    optional SubscriptionResponse = 5;
+    optional SubscriptionValues = 6;
+
 }
