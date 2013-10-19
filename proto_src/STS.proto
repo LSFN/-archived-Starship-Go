@@ -52,10 +52,10 @@ message STSup {
     }
 
     message Thrusters {
-        optional bool forwardLeft = 1;
-        optional bool forwardRight = 2;
-        optional bool rearLeft = 3;
-        optional bool rearRight = 4;
+        optional double forwardLeft = 1;
+        optional double forwardRight = 2;
+        optional double rearLeft = 3;
+        optional double rearRight = 4;
     }
 
     optional RCon rcon = 1;
