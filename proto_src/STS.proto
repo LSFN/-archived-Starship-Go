@@ -1,4 +1,4 @@
-option java_package = "org.lsfn.nebula";
+option java_package = "org.lsfn.common";
 option java_outer_classname = "STS";
 
 message STSup {
@@ -12,7 +12,7 @@ message STSup {
             REJOIN = 1;
         }
         
-        optional JoinType type = 1;
+        required JoinType type = 1;
         optional string rejoinToken = 2;
     }
 
@@ -43,11 +43,12 @@ message STSup {
     }
 
     message PowerDistribution {
-        message SystemState {
-            required uint32 systemID = 1;
-            required bool systemState = 2;
-        }
-        repeated SystemState systemStates = 1;
+        optional bool leftEngine = 1;
+        optional bool rightEngine = 2;
+        optional bool forwardLeftThruster = 3;
+        optional bool forwardRightThruster = 4;
+        optional bool rearLeftThruster = 5;
+        optional bool rearRightThruster = 6;
     }
 
     message Engines {
@@ -76,7 +77,7 @@ message STSup {
 message STSdown {
     message JoinInfo {
         required bool allowJoin = 1;
-        optional string gameIDtoken = 2;
+        required string gameIDtoken = 2;
     }
 
     message JoinResponse {
@@ -123,23 +124,31 @@ message STSdown {
     }
     
     message Reactor {
-        optional double powerOutput = 1;
-        optional double heatLevel = 2;
+        optional double reactantIntroduction = 1;
+        optional double coolantIntroduction = 2;
+        optional double powerOutput = 3;
+        optional double heatLevel = 4;
     }
 
     message PowerDistribution {
-        message SystemDescription {
-            required uint32 systemID = 1;
-            required string systemName = 2;
-        }
-        message SystemState {
-            required uint32 systemID = 1;
-            required bool systemState = 2;
-            required double powerLevel = 3;
-        }
+        optional bool leftEngine = 1;
+        optional bool rightEngine = 2;
+        optional bool forwardLeftThruster = 3;
+        optional bool forwardRightThruster = 4;
+        optional bool rearLeftThruster = 5;
+        optional bool rearRightThruster = 6;
+    }
 
-        repeated SystemDescription systemDescriptions = 1;
-        repeated SystemState systemStates = 2;
+    message Engines {
+        optional double leftEngineThrottle = 1;
+        optional double rightEngineThrottle = 2;
+    }
+
+    message Thrusters {
+        optional double forwardLeft = 1;
+        optional double forwardRight = 2;
+        optional double rearLeft = 3;
+        optional double rearRight = 4;
     }
 
     optional Connection connection = 1;
@@ -149,4 +158,6 @@ message STSdown {
     optional VisualSensors visualSensors = 5;
     optional Reactor reactor = 6;
     optional PowerDistribution powerDistribution = 7;
+    optional Engines engines = 8;
+    optional Thrusters thrusters = 9;
 }
